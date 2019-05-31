@@ -10,7 +10,6 @@ public class DropBoxBase
 {
     #region Variables  
     private DropboxClient DBClient;
-    private ListFolderArg DBFolders;
     #endregion
 
     #region Constructor  
@@ -122,7 +121,7 @@ public class DropBoxBase
             }
 
             var folderArg = new CreateFolderArg(path);
-            var folder = await DBClient.Files.CreateFolderAsync(folderArg);
+            await DBClient.Files.CreateFolderAsync(folderArg);
 
             Console.Write("Folder {0} created successfullly.\n", path);
         }
@@ -143,7 +142,7 @@ public class DropBoxBase
             }
 
             path = CompletePath(path);
-            var folders = await DBClient.Files.ListFolderAsync(path);
+            await DBClient.Files.ListFolderAsync(path);
             return true;
         }
         catch (Exception)
@@ -162,7 +161,7 @@ public class DropBoxBase
             }
 
             path = CompletePath(path);
-            var metadata = await DBClient.Files.GetMetadataAsync(path);
+            await DBClient.Files.GetMetadataAsync(path);
             return true;
         }
         catch (Exception)
@@ -182,7 +181,7 @@ public class DropBoxBase
 
             path = CompletePath(path);
 
-            var folders = await DBClient.Files.DeleteAsync(path);
+            await DBClient.Files.DeleteAsync(path);
             return true;
         }
         catch (Exception)
@@ -213,7 +212,7 @@ public class DropBoxBase
         try
         {
             path = CompletePath(path);
-            var settings = new SharedLinkSettings();
+            //var settings = new SharedLinkSettings();
             var sharedLinkMetadata = await DBClient.Sharing.ListSharedLinksAsync(path);
             var links = sharedLinkMetadata.Links;
 
