@@ -8,74 +8,121 @@ namespace Dropbox.Tests
     [TestClass()]
     public class DropboxTests
     {
-        /*
-        [TestMethod()]
+        DropBoxBase dropboxBase;
+
+        //[TestMethod()]
         public void DropBoxBaseTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
+        //[TestMethod()]
         public void CloseTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void CreateFolderTest()
+        //[TestMethod()]
+        public async Task CreateFolderTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void FolderExistsTest()
+        //[TestMethod()]
+        public async Task FolderExistsTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void FileExistsTest()
+        //[TestMethod()]
+        public async Task FileExistsTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void DeleteTest()
+        //[TestMethod()]
+        public async Task DeleteTest()
         {
             Assert.Fail();
         }
 
+        //[TestMethod()]
+        public async Task CreateSharedLinkTest()
+        {
+            try
+            {
+                dropboxBase = new DropBoxBase();
+                var url = await dropboxBase.CreateSharedLink("dir1/math.jpg");
+                dropboxBase.Close();
+
+                Assert.AreNotEqual(null, url);
+                Console.Write("url = {0}", url);
+            }
+            catch (Exception e)
+            {
+                dropboxBase.Close();
+                Console.Write(e.ToString());
+                throw e;
+            }
+        }
+
         [TestMethod()]
-        public void CreateSharedLinkTest()
+        public async Task GetSharedLinkExistTest()
+        {
+            try
+            {
+                var urlExpected = "https://www.dropbox.com/s/j02x06nvxvlec33/math.jpg?dl=0";
+                dropboxBase = new DropBoxBase();
+                var url = await dropboxBase.GetSharedLink("dir1/math.jpg");
+                dropboxBase.Close();
+
+                Assert.AreEqual(urlExpected, url);
+            }
+            catch (Exception e)
+            {
+                dropboxBase.Close();
+                Console.Write(e.ToString());
+                throw e;
+            }
+        }
+
+        //[TestMethod()]
+        public async Task GetSharedLinkNotExistTest()
+        {
+            try
+            {
+                dropboxBase = new DropBoxBase();
+                var url = await dropboxBase.GetSharedLink("dir2/trab_teste_sw.pdf");
+                Assert.AreEqual(null, url);
+                dropboxBase.Close();
+            }
+            catch (Exception e)
+            {
+                dropboxBase.Close();
+                Console.Write(e.ToString());
+                throw e;
+            }
+        }
+
+        //[TestMethod()]
+        public async Task GetTempLinkTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void GetSharedLinkTest()
+        //[TestMethod()]
+        public async Task UploadTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void GetTempLinkTest()
+        //[TestMethod()]
+        public async Task DownloadTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void UploadTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void DownloadTest()
-        {
-            Assert.Fail();
-        }*/
-
-        [TestMethod()]
+        //[TestMethod()]
         public async Task InitTestDirectory()
         {
             try
@@ -100,5 +147,7 @@ namespace Dropbox.Tests
                 Console.Write(e.ToString());
             }
         }
+
+        
     }
 }
